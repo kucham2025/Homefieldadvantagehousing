@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Field Advantage Housing DAO</title>
+    <!-- Load Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Apply Inter font to the body */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom gradient for the hero section */
+        .hero-gradient {
+            background: linear-gradient(120deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%);
+        }
+
+        /* Style for the token allocation chart placeholder */
+        .chart-placeholder {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* 1:1 Aspect Ratio */
+            background-color: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+            border: 8px solid #d1d5db;
+        }
+
+        /* Placeholder for founder images */
+        .founder-img {
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+
+        /* New style for the house-shaped button */
+        .house-button {
+            /* clip-path to create a house shape (pentagon) */
+            clip-path: polygon(0% 25%, 50% 0%, 100% 25%, 100% 100%, 0% 100%);
+            
+            /* Adjust padding to push text below the "roof" */
+            padding-top: 1.125rem; /* 18px */
+            padding-bottom: 0.625rem; /* 10px */
+            
+            /* Override rounded corners */
+            border-radius: 0; 
+            
+            /* Center text (for <a> tags) */
+            text-align: center;
+            
+            /* Ensure it has a minimum height to show the shape */
+            min-height: 50px; 
+            
+            /* Center content (for flex) */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Separate class for mobile to handle block display */
+        .house-button-mobile {
+            clip-path: polygon(0% 25%, 50% 0%, 100% 25%, 100% 100%, 0% 100%);
+            padding-top: 1.125rem; /* 18px */
+            padding-bottom: 0.625rem; /* 10px */
+            border-radius: 0;
+            text-align: center;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+    <!-- Header Navigation -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm border-b border-gray-200">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo / Site Name -->
+            <a href="#" class="text-xl md:text-2xl font-bold text-blue-600">
+                Home Field Advantage <span class="hidden sm:inline">Housing DAO</span>
+            </a>
+            
+            <!-- Desktop Navigation Links -->
+            <div class="hidden lg:flex items-center space-x-6">
+                <a href="#problem" class="text-gray-600 hover:text-blue-600 font-medium">The Problem</a>
+                <a href="#solution" class="text-gray-600 hover:text-blue-600 font-medium">Our Solution</a>
+                <a href="#tokenomics" class="text-gray-600 hover:text-blue-600 font-medium">Tokenomics</a>
+                <a href="#investors" class="text-gray-600 hover:text-blue-600 font-medium">Investor ROI</a>
+                <a href="#about-us" class="text-gray-600 hover:text-blue-600 font-medium">Our Why</a>
+                <!-- Updated Login Button -->
+                <a href="#" class="text-blue-600 border border-blue-600 px-5 font-semibold hover:bg-blue-50 transition duration-300 house-button">
+                    DAO Member Login
+                </a>
+                <a href="#cta" class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 transition duration-300">
+                    Join The Movement
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="lg:hidden text-gray-700 focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-lg absolute top-full left-0 right-0 z-40">
+            <a href="#problem" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 font-medium">The Problem</a>
+            <a href="#solution" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 font-medium">Our Solution</a>
+            <a href="#tokenomics" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 font-medium">Tokenomics</a>
+            <a href="#investors" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 font-medium">Investor ROI</a>
+            <a href="#about-us" class="block px-6 py-3 text-gray-600 hover:bg-gray-50 font-medium">Our Why</a>
+            <div class="px-6 py-3">
+                <!-- Updated Mobile Login Button -->
+                <a href="#" class="block w-full text-center text-blue-600 border border-blue-600 px-5 font-semibold hover:bg-blue-50 transition duration-300 house-button-mobile">
+                    DAO Member Login
+                </a>
+            </div>
+            <div class="px-6 pb-3">
+                <a href="#cta" class="block w-full text-center bg-blue-600 text-white px-5 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300">
+                    Join The Movement
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section class="relative hero-gradient pt-24 pb-32 md:pt-32 md:pb-40">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6 leading-tight">
+                    Building the Future of Housing.
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-10">
+                    A community-owned DAO dedicated to creating affordable, sustainable, and universally designed homes.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#cta" class="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transition duration-300 shadow-lg">
+                        Join The Movement
+                    </a>
+                    <a href="#solution" class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-50 transition duration-300 shadow-lg border border-gray-200">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Problem Section -->
+        <section id="problem" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-sm font-semibold text-blue-600 uppercase tracking-wide">The Crisis</h2>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">
+                        The American Dream is Unattainable
+                    </h3>
+                    <p class="text-lg md:text-xl text-gray-600 mb-12">
+                        Housing insecurity is a defining challenge of our time. Soaring prices, stagnant wages, and systemic inequities have pushed stable, affordable housing out of reach for millions. The traditional model is failing our communities, our elders, our youth, and our most vulnerable populations.
+                    </p>
+                </div>
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Stat 1 -->
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-200">
+                        <h4 class="text-4xl font-extrabold text-blue-600 mb-3">771,000+</h4>
+                        <p class="text-lg font-semibold text-gray-800">Individuals Facing Homelessness</p>
+                        <p class="text-gray-600 mt-1">The highest number ever recorded, as of 2024.</p>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-200">
+                        <h4 class="text-4xl font-extrabold text-blue-600 mb-3">60%</h4>
+                        <p class="text-lg font-semibold text-gray-800">Surge in Home Prices</p>
+                        <p class="text-gray-600 mt-1">Nationwide spike since 2019, while incomes remain stagnant.</p>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-200">
+                        <h4 class="text-4xl font-extrabold text-blue-600 mb-3">41%</h4>
+                        <p class="text-lg font-semibold text-gray-800">Fear They'll Never Own a Home</p>
+                        <p class="text-gray-600 mt-1">A 2025 survey highlights the growing affordability gap.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Solution Section -->
+        <section id="solution" class="py-20 md:py-28 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center mb-16">
+                    <h2 class="text-sm font-semibold text-blue-600 uppercase tracking-wide">The Solution</h2>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">
+                        A New Foundation, Built on Community
+                    </h3>
+                    <p class="text-lg md:text-xl text-gray-600">
+                        Home Field Advantage Housing DAO is a decentralized, community-driven ecosystem. We leverage blockchain technology to fund, build, and govern affordable and sustainable housing communities based on Universal Design principles.
+                    </p>
+                </div>
+                
+                <!-- Features Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+                    <!-- Feature 1: Find Housing -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex-shrink-0 mb-5">
+                            <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1V10M9 22v-4h6v4H9z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Affordable Housing Access</h4>
+                        <p class="text-gray-600">
+                            Find and secure affordable, high-quality housing options within our DAO-owned properties. Our model is designed to create permanently affordable homes, not speculative assets.
+                        </p>
+                    </div>
+                    
+                    <!-- Feature 2: Community Governance -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex-shrink-0 mb-5">
+                            <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5V6a2 2 0 00-2-2H4a2 2 0 00-2 2v14h5m0 0a3 3 0 01-3 3h4a3 3 0 01-3-3m0 0h6m-6 0a3 3 0 003 3h4a3 3 0 003-3m0 0h5m-5 0v-3a3 3 0 00-3-3H9a3 3 0 00-3 3v3m0 0a3 3 0 003 3h4a3 3 0 003-3m-3-3V6m3 3V6m0 3h-3m-3-3h.01M12 6h.01M9 6h.01M6 6h.01M6 9h.01M6 12h.01M9 12h.01M12 12h.01M15 12h.01M18 12h.01M9 15h.01M12 15h.01M15 15h.01"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">True Community Governance</h4>
+                        <p class="text-gray-600">
+                            As a DAO member, you have a real vote. Decide on new projects, land acquisitions, community rules, and how our treasury is spent using our fair quadratic voting models.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3: Crypto Integration -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex-shrink-0 mb-5">
+                            <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0-8c-1.11 0-2.08.402-2.599 1M12 16V7m0 9v1m0-1c-1.657 0-3-.895-3-2s1.343-2 3-2 3-.895 3-2 1.343-2 3-2m0 8c1.11 0 2.08-.402 2.599-1M12 16v-1m0 1c-1.11 0-2.08-.402-2.599-1m10.156-8.996a11.956 11.956 0 01-2.599 1m-7.557 0a11.956 11.956 0 00-2.599-1m12.756 0A12.02 12.02 0 0112 3C6.477 3 2 7.477 2 13s4.477 10 10 10 10-4.477 10-10c0-1.67-.34-3.243-.944-4.696z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Integrated Digital Economy</h4>
+                        <p class="text-gray-600">
+                            Use our stablecoin (HFUSD) to pay rent, mortgages, or shop at local businesses within the community. Our economy is designed to be seamless, low-fee, and self-sustaining.
+                        </p>
+                    </div>
+
+                    <!-- Feature 4: Universal Design -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex-shrink-0 mb-5">
+                            <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2zM12 9v4m0 4h.01"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Universal & Smart Design</h4>
+                        <p class="text-gray-600">
+                            Our communities are built for everyone. With step-free entrances, smart home tech, and sensory-friendly layouts, we prioritize accessibility for all ages and abilities.
+                        </p>
+                    </div>
+                    
+                    <!-- Feature 5: Sustainable Living -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex-shrink-0 mb-5">
+                            <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Sustainable & Green</h4>
+                        <p class="text-gray-600">
+                            We prioritize energy-efficient construction, renewable energy, green spaces, and local food systems. Live in a community that is as healthy for you as it is for the planet.
+                        </p>
+                    </div>
+
+                    <!-- Feature 6: Fractional Ownership -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex-shrink-0 mb-5">
+                            <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M12 17l-2-1m0 0l-2 1m2-1V14.5m0 0l2 1m0 0l2-1m-2 1V14.5m0 0l-2-1m2 1l2 1m0 0l2-1m-2 1V14.5M12 21a9 9 0 110-18 9 9 0 010 18z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Fractional Asset Ownership</h4>
+                        <p class="text-gray-600">
+                            Through our asset token (HFHAT), members can own a fractional, liquid stake in the community's real estate and infrastructure. Build wealth as the community grows.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tokenomics Section -->
+        <section id="tokenomics" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+                    
+                    <!-- Left Column: Chart -->
+                    <div class="w-full lg:w-2/5">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6">A Dual-Token Economy</h2>
+                        <p class="text-lg text-gray-600 mb-8">
+                            Our ecosystem runs on two distinct tokens, creating a stable and balanced system for governance, investment, and daily transactions.
+                        </p>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-xl font-bold text-blue-700">HFHAT (Home Field Advantage Token)</h4>
+                                <p class="text-gray-600">An asset-backed token representing fractional ownership in our real estate portfolio. Hold HFHAT to build wealth and participate in high-level governance.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-green-700">HFUSD (Home Field USD)</h4>
+                                <p class="text-gray-600">A stablecoin used for all community transactions, such as paying rent, mortgage payments, and purchasing goods and services from local partners.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Allocation -->
+                    <div class="w-full lg:w-3/5">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Initial Token Allocation</h3>
+                        <!-- Placeholder for the pie chart -->
+                        <div class="relative w-full max-w-md mx-auto">
+                            <img src="https://placehold.co/600x600/f0f9ff/3b82f6?text=Token+Allocation+Chart" 
+                                 class="rounded-full shadow-2xl" 
+                                 alt="Placeholder for initial token allocation pie chart.">
+                            <!-- This is a placeholder. The actual chart would show:
+                                 40% Public Sale, 20% Development Fund, 15% DAO Treasury, 
+                                 10% Team & Advisors, 10% Strategic Partners, 5% Liquidity Pool -->
+                        </div>
+                        <ul class="grid grid-cols-2 gap-x-6 gap-y-3 mt-8 max-w-md mx-auto text-gray-700">
+                            <li class="flex items-center"><span class="w-3 h-3 rounded-full bg-blue-600 mr-3"></span>40% Public Sale</li>
+                            <li class="flex items-center"><span class="w-3 h-3 rounded-full bg-orange-500 mr-3"></span>20% Development Fund</li>
+                            <li class="flex items-center"><span class="w-3 h-3 rounded-full bg-green-500 mr-3"></span>15% DAO Treasury</li>
+                            <li class="flex items-center"><span class="w-3 h-3 rounded-full bg-red-500 mr-3"></span>10% Team & Advisors</li>
+                            <li class="flex items-center"><span class="w-3 h-3 rounded-full bg-purple-500 mr-3"></span>10% Strategic Partners</li>
+                            <li class="flex items-center"><span class="w-3 h-3 rounded-full bg-gray-400 mr-3"></span>5% Liquidity Pool</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investor ROI Section -->
+        <section id="investors" class="py-20 md:py-28 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center mb-16">
+                    <h2 class="text-sm font-semibold text-blue-600 uppercase tracking-wide">For Investors</h2>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">
+                        A New Model for Investor Returns
+                    </h3>
+                    <p class="text-lg md:text-xl text-gray-600">
+                        Investing in the Home Field Advantage DAO is an opportunity to generate strong financial returns while creating measurable social impact. Our model offers multiple, transparent revenue streams.
+                    </p>
+                </div>
+
+                <!-- ROI Streams -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16">
+                    <!-- Stream 1: Staking -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Staking Rewards</h4>
+                        <p class="text-gray-600">
+                            Earn passive yield by staking your HFHAT tokens. The longer you commit to staking, the higher your Annual Percentage Yield (APY), rewarding long-term support for the ecosystem.
+                        </p>
+                    </div>
+                    <!-- Stream 2: Rental Income -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Rental Income</h4>
+                        <p class="text-gray-600">
+                            HFHAT token holders receive a proportional share of the net rental income generated from our entire portfolio of properties, distributed transparently via smart contract.
+                        </p>
+                    </div>
+                    <!-- Stream 3: Transaction Fees -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Ecosystem Fees</h4>
+                        <p class="text-gray-600">
+                            A small percentage of transaction fees from lease payments, mortgage processing, and commercial activity (using HFUSD) is collected and distributed back to HFHAT stakers.
+                        </V>
+                    </div>
+                </div>
+
+                <!-- Staking Tiers Table -->
+                <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+                    <h4 class="text-2xl font-bold text-center text-gray-900 p-6 bg-gray-100">Staking Tiers and Rewards</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-200">
+                                <tr>
+                                    <th class="px-6 py-4 text-sm font-semibold text-gray-700 uppercase">Staking Period</th>
+                                    <th class="px-6 py-4 text-sm font-semibold text-gray-700 uppercase">APY Range</th>
+                                    <th class="px-6 py-4 text-sm font-semibold text-gray-700 uppercase">Benefits</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 font-medium text-gray-800">1 Month</td>
+                                    <td class="px-6 py-4 font-medium text-green-600">4–6%</td>
+                                    <td class="px-6 py-4 text-gray-600">Basic rewards</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 font-medium text-gray-800">3 Months</td>
+                                    <td class="px-6 py-4 font-medium text-green-600">6–8%</td>
+                                    <td class="px-6 py-4 text-gray-600">Higher yield</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 font-medium text-gray-800">6 Months</td>
+                                    <td class="px-6 py-4 font-medium text-green-600">8–10%</td>
+                                    <td class="px-6 py-4 text-gray-600">Bonus reward weight</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 font-medium text-gray-800">12 Months</td>
+                                    <td class="px-6 py-4 font-medium text-green-600">10–12%</td>
+                                    <td class="px-6 py-4 text-gray-600">Premium rewards</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 font-medium text-gray-800">18 Months</td>
+                                    <td class="px-6 py-4 font-medium text-green-600">12–15%</td>
+                                    <td class="px-6 py-4 text-gray-600">Maximum yield</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Why & Team Section -->
+        <section id="about-us" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center mb-16">
+                    <h2 class="text-sm font-semibold text-blue-600 uppercase tracking-wide">About Us</h2>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">
+                        Our "Why" & The Team
+                    </h3>
+                    <p class="text-lg md:text-xl text-gray-600">
+                        We are a collective of technologists, community organizers, urban planners, and real estate professionals who believe a better housing model is not just possible, but necessary. We've seen the housing crisis devastate our own communities and families. We're building Home Field Advantage Housing DAO because we are driven by a shared mission to restore dignity, stability, and opportunity to housing. This isn't just a project for us—it's a personal fight for the future we all deserve.
+                    </p>
+                </div>
+
+                <!-- Founder Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-7xl mx-auto">
+                    
+                    <!-- Founder 1 -->
+                    <div class="text-center">
+                        <img class="founder-img w-48 h-48 mx-auto rounded-full shadow-lg mb-4" 
+                             src="https://placehold.co/200x200/e0f2fe/3b82f6?text=Founder+1" 
+                             alt="Portrait of Founder 1">
+                        <h4 class="text-xl font-bold text-gray-900">Founder Name</h4>
+                        <p class="text-blue-600 font-medium">Role (e.g., Lead Visionary)</p>
+                        <p class="text-gray-600 mt-2 text-sm">A short bio about the founder, their passion for this project, and their relevant background.</p>
+                    </div>
+                    
+                    <!-- Founder 2 -->
+                    <div class="text-center">
+                        <img class="founder-img w-48 h-48 mx-auto rounded-full shadow-lg mb-4" 
+                             src="https://placehold.co/200x200/e0f2fe/3b82f6?text=Founder+2" 
+                             alt="Portrait of Founder 2">
+                        <h4 class="text-xl font-bold text-gray-900">Founder Name</h4>
+                        <p class="text-blue-600 font-medium">Role (e.g., Tech Lead)</p>
+                        <p class="text-gray-600 mt-2 text-sm">A short bio about the founder, their passion for this project, and their relevant background.</p>
+                    </div>
+                    
+                    <!-- Founder 3 -->
+                    <div class="text-center">
+                        <img class="founder-img w-48 h-48 mx-auto rounded-full shadow-lg mb-4" 
+                             src="https://placehold.co/200x200/e0f2fe/3b82f6?text=Founder+3" 
+                             alt="Portrait of Founder 3">
+                        <h4 class="text-xl font-bold text-gray-900">Founder Name</h4>
+                        <p class="text-blue-600 font-medium">Role (e.g., Community Lead)</p>
+                        <p class="text-gray-600 mt-2 text-sm">A short bio about the founder, their passion for this project, and their relevant background.</p>
+                    </div>
+
+                    <!-- Founder 4 -->
+                    <div class="text-center">
+                        <img class="founder-img w-48 h-48 mx-auto rounded-full shadow-lg mb-4" 
+                             src="https://placehold.co/200x200/e0f2fe/3b82f6?text=Founder+4" 
+                             alt="Portrait of Founder 4">
+                        <h4 class="text-xl font-bold text-gray-900">Founder Name</h4>
+                        <p class="text-blue-600 font-medium">Role (e.g., Finance Lead)</p>
+                        <p class="text-gray-600 mt-2 text-sm">A short bio about the founder, their passion for this project, and their relevant background.</p>
+                    </div>
+
+                    <!-- Founder 5 -->
+                    <div class="text-center">
+                        <img class="founder-img w-48 h-48 mx-auto rounded-full shadow-lg mb-4" 
+                             src="https://placehold.co/200x200/e0f2fe/3b82f6?text=Founder+5" 
+                             alt="Portrait of Founder 5">
+                        <h4 class="text-xl font-bold text-gray-900">Founder Name</h4>
+                        <p class="text-blue-600 font-medium">Role (e.g., Legal & Ops)</p>
+                        <p class="text-gray-600 mt-2 text-sm">A short bio about the founder, their passion for this project, and their relevant background.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section id="cta" class="bg-blue-600 text-white">
+            <div class="container mx-auto px-6 py-20 md:py-28 text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-6">
+                    Be Part of the Solution
+                </h2>
+                <p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto mb-10">
+                    Whether you're looking for a home, an investor, or a partner, we invite you to join our movement. Get updates, read our whitepaper, and help us build the future of housing.
+                </p>
+                <!-- Simple Form -->
+                <form class="max-w-lg mx-auto">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <input type="email" 
+                               placeholder="Enter your email address" 
+                               class="w-full px-5 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-4 focus:ring-blue-300" 
+                               required>
+                        <button type="submit" 
+                                class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-lg flex-shrink-0">
+                            Get Updates
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Column 1: About -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Home Field Advantage Housing DAO</h3>
+                    <p class="text-sm">
+                        Building affordable, sustainable, and inclusive communities governed by their members.
+                    </p>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="text-md font-semibold text-white uppercase tracking-wider mb-4">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#problem" class="hover:text-white">The Problem</a></li>
+                        <li><a href="#solution" class="hover:text-white">Our Solution</a></li>
+                        <li><a href="#tokenomics" class="hover:text-white">Tokenomics</a></li>
+                        <li><a href="#investors" class="hover:text-white">Investor ROI</a></li>
+                        <li><a href="#about-us" class="hover:text-white">Our Why</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Resources -->
+                <div>
+                    <h4 class="text-md font-semibold text-white uppercase tracking-wider mb-4">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white">Read Whitepaper</a></li>
+                        <li><a href="#" class="hover:text-white">Governance Portal</a></li>
+                        <li><a href="#" class="hover:text-white">Pitch Deck</a></li>
+                        <li><a href="#" class="hover:text-white">Media Kit</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Connect -->
+                <div>
+                    <h4 class="text-md font-semibold text-white uppercase tracking-wider mb-4">Connect</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white">Community Discord</a></li>
+                        <li><a href="#" class="hover:text-white">Twitter / X</a></li>
+                        <li><a href="#" class="hover:text-white">Telegram</a></li>
+                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="mt-16 pt-8 border-t border-gray-700 text-center text-sm">
+                <p>&copy; 2024 Home Field Advantage Housing DAO. All rights reserved.</p>
+                <p class="mt-2">This is not financial advice. Please conduct your own research.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>
